@@ -3,7 +3,8 @@ from flask import Flask, render_template, request
 app = Flask(__name__)
 
 def MyFunc():
-    return "Button press success!"
+    print("ButtonPressed!")
+    return "goodBoi"
 
 @app.route('/')
 def index():
@@ -11,9 +12,8 @@ def index():
 
 @app.route('/execute', methods=['POST'])
 def ExecuteFunction():
-    if request.method == 'POST':
-        result = MyFunc()
-        return result
+    result = MyFunc()
+    return render_template('index.html')
 
 if __name__=='__main__':
     app.run(debug=True, host='0.0.0.0')

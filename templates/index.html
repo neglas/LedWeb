@@ -1,12 +1,26 @@
 <html>
     <head>
-        <link rel="stylesheet" href='/static/style.css'/>
+        <style>
+            .btn{
+                background-color: white;
+            }
+            .btn.clicked{
+                background-color: green; 
+            }
+        </style>
     </head>
     <body>
         <h1>My Website</h1>
+        <button type="submit" class="btn" id="MyBtn">Click Me2!</button>
         <form action="/execute" method ="post">
             <button type="button">Click Me!</button>
-            <button type="submit">Click Me2!</button>    
+                
         </form>
+        <script>
+            document.getElementById("MyBtn").addEventListener("click", function(){
+                this.classList.add("clicked")
+               
+            });
+        </script>
     </body>
 </html>
