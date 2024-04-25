@@ -3,8 +3,7 @@ from flask import Flask, render_template, request
 app = Flask(__name__)
 
 def MyFunc():
-    if True:
-        return "Button press success!"
+    return "Button press success!"
 
 @app.route('/')
 def index():
