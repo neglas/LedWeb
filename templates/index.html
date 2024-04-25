@@ -1,5 +1,6 @@
 <html>
     <head>
+        <meta charset="UTF-8">
         <style>
             .btn{
                 background-color: white;
@@ -11,15 +12,24 @@
     </head>
     <body>
         <h1>My Website</h1>
-        <button type="submit" class="btn" id="MyBtn">Click Me2!</button>
+       
         <form action="/execute" method ="post">
             <button type="button">Click Me!</button>
-                
+            <button type="submit" class="btn" id="MyBtn">Click Me2!</button> 
         </form>
         <script>
-            document.getElementById("MyBtn").addEventListener("click", function(){
+            document.getElementById("MyBtn").addEventListener("click", function(event){
+                event.preventDefault();
                 this.classList.add("clicked")
-               
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "/execute", true);
+                xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8")
+                xhr.onload = function(){
+                    if (xhr.status==200){
+                        console.log(xhr.responseText);
+                    }
+                };
+                xhr.send();
             });
         </script>
     </body>

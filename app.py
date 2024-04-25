@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, jsonify
 
 app = Flask(__name__)
 
@@ -13,7 +13,7 @@ def index():
 @app.route('/execute', methods=['POST'])
 def ExecuteFunction():
     result = MyFunc()
-    return render_template('index.html')
+    return jsonify({"result": result})
 
 if __name__=='__main__':
     app.run(debug=True, host='0.0.0.0')
