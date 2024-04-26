@@ -16,17 +16,20 @@
         <h1>My Website</h1>
        
         <form action="/execute" method ="post">
-            <button type="button">Click Me!</button>
-            <button type="submit" class="btn off" id="MyBtn">Click Me2!</button> 
+            <button type="submit" class="btn off" id="MyBtn">HyperHDR</button> 
         </form>
         <script>
             document.getElementById("MyBtn").addEventListener("click", function(event){
                 event.preventDefault();
 
+                
+                var status = "invalid";
                 if (this.classList.contains("off")){
                     this.classList.remove("off")
+                    status = "on";
                 }else{
                     this.classList.add("off")
+                    status = "off";
                 }
                 var xhr = new XMLHttpRequest();
                 xhr.open("POST", "/execute", true);
@@ -36,7 +39,7 @@
                         console.log(xhr.responseText);
                     }
                 };
-                xhr.send();
+                xhr.send(JSON.stringify({status: status}));
             });
         </script>
     </body>

@@ -1,18 +1,37 @@
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify, request
+import subprocess
 
-app = Flask(__name__)
-
-def MyFunc():
-    print("ButtonPressed!")
+def TurnHyperON():
+    print("ON")
+    subprocess.call(['sh', './StartHDR.sh'])
     return "goodBoi"
 
+def TurnHyperOff():
+    print("OFF")
+    subprocess.call(['sh', './StopHDR.sh'])
+    return "goodBoi"
+
+
+def MyFunc():
+    subprocess.call(['sh', './testshell.sh'])
+    return "goodBoi"
+
+app = Flask(__name__)
 @app.route('/')
 def index():
     return render_template('index.html')
 
 @app.route('/execute', methods=['POST'])
 def ExecuteFunction():
-    result = MyFunc()
+    data = request.get_json()
+
+    if(data.get('status')=='on'):
+        result = TurnHyperON()
+    elif(data.get('status')=='off'):
+        result = TurnHyperOff()
+    else:
+        result = "Invalid status"
+        
     return jsonify({"result": result})
 
 if __name__=='__main__':
