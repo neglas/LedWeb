@@ -1,3 +1,3 @@
 #!/usr/bin/bash
-gnome-terminal -- /bin/bash -c 'echo Hello; exec bash'
-echo "I want to start running my lil serverboi!"
+source /home/neglas/Webapp/.webapp/bin/activate
+python3 /home/neglas/Webapp/app.py

@@ -3,12 +3,12 @@ import subprocess
 
 def TurnHyperON():
     print("ON")
-    subprocess.call(['sh', './StartHDR.sh'])
+    subprocess.call(['sh', '/home/neglas/Webapp/StartHDR.sh'])
     return "goodBoi"
 
 def TurnHyperOff():
     print("OFF")
-    subprocess.call(['sh', './StopHDR.sh'])
+    subprocess.call(['sh', '/home/neglas/Webapp/StopHDR.sh'])
     return "goodBoi"
 
 
