@@ -1,12 +1,14 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <style>
             .btn{
-                background-color: white;
+                background-color: green;
             }
-            .btn.clicked{
-                background-color: green; 
+            .btn.off{
+                background-color: white;
+                color: black;
             }
         </style>
     </head>
@@ -15,12 +17,17 @@
        
         <form action="/execute" method ="post">
             <button type="button">Click Me!</button>
-            <button type="submit" class="btn" id="MyBtn">Click Me2!</button> 
+            <button type="submit" class="btn off" id="MyBtn">Click Me2!</button> 
         </form>
         <script>
             document.getElementById("MyBtn").addEventListener("click", function(event){
                 event.preventDefault();
-                this.classList.add("clicked")
+
+                if (this.classList.contains("off")){
+                    this.classList.remove("off")
+                }else{
+                    this.classList.add("off")
+                }
                 var xhr = new XMLHttpRequest();
                 xhr.open("POST", "/execute", true);
                 xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8")
