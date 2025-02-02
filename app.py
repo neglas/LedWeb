@@ -2,13 +2,18 @@ from flask import Flask, render_template, jsonify, request
 import subprocess
 
 def TurnHyperON():
-    print("ON")
     subprocess.call(['sh', '/home/neglas/Webapp/StartHDR.sh'])
+    return "goodboi"
+def TurnMovieModeON():
+    print("ON")
+    TurnHyperON()
+    subprocess.call(['sh', '/home/neglas/Webapp/DimLightsDown.sh'])
     return "goodBoi"
 
 def TurnHyperOff():
     print("OFF")
     subprocess.call(['sh', '/home/neglas/Webapp/StopHDR.sh'])
+    subprocess.call(['sh', '/home/neglas/Webapp/DimLightsUp.sh'])
     return "goodBoi"
 
 
@@ -26,9 +31,14 @@ def ExecuteFunction():
     data = request.get_json()
 
     if(data.get('status')=='on'):
-        result = TurnHyperON()
+        if(data.get('buttonId')=='MyBtn'):
+            result = TurnHyperON()
+        elif(data.get('buttonId')=='MovieModeBtn'):
+            TurnMovieModeON()
     elif(data.get('status')=='off'):
         result = TurnHyperOff()
+    elif(data.get('status')=='movie_mode'):
+        result = TurnMovieModeON()
     else:
         result = "Invalid status"
         
