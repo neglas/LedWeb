@@ -4,18 +4,21 @@ import subprocess
 def TurnHyperON():
     subprocess.call(['sh', '/home/neglas/Webapp/StartHDR.sh'])
     return "goodboi"
+
+def TurnHyperOFF():
+    print("OFF")
+    subprocess.call(['sh', '/home/neglas/Webapp/StopHDR.sh'])
+    return "goodBoi"
+
 def TurnMovieModeON():
     print("ON")
     TurnHyperON()
     subprocess.call(['sh', '/home/neglas/Webapp/DimLightsDown.sh'])
     return "goodBoi"
 
-def TurnHyperOff():
-    print("OFF")
-    subprocess.call(['sh', '/home/neglas/Webapp/StopHDR.sh'])
-    subprocess.call(['sh', '/home/neglas/Webapp/DimLightsUp.sh'])
-    return "goodBoi"
-
+def TurnMovieModeOFF():
+    TurnHyperOFF()
+    subprocess.call(['sh', '/home/neglas/Webapp/DimLightsUp.sh'])	
 
 def MyFunc():
     subprocess.call(['sh', './testshell.sh'])
@@ -29,16 +32,18 @@ def index():
 @app.route('/execute', methods=['POST'])
 def ExecuteFunction():
     data = request.get_json()
-
-    if(data.get('status')=='on'):
-        if(data.get('buttonId')=='MyBtn'):
+    print(data)
+    if(data.get('buttonId')=='MyBtn'):
+        if(data.get('status')=='on'):
             result = TurnHyperON()
-        elif(data.get('buttonId')=='MovieModeBtn'):
-            TurnMovieModeON()
-    elif(data.get('status')=='off'):
-        result = TurnHyperOff()
-    elif(data.get('status')=='movie_mode'):
-        result = TurnMovieModeON()
+        elif(data.get('status')=='off'):
+            result = TurnHyperOFF()
+    elif(data.get('buttonId')=='MviBtn'):
+       
+        if(data.get('status')=='on'):
+            result = TurnMovieModeON()
+        elif(data.get('status')=='off'):
+            result = TurnMovieModeOFF()
     else:
         result = "Invalid status"
         

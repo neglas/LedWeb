@@ -25,16 +25,16 @@
                 
                 	var status = "invalid";
 	               
-			 if (button.classList.contains("off")){
-	                    button.classList.remove("off")
+			if (button.classList.contains("off")){
+	                    button.classList.remove("off");
 	                    status = "on";
 	                }else{
-	                    button.classList.add("off")
+	                    button.classList.add("off");
 	                    status = "off";
 	                }
 	                var xhr = new XMLHttpRequest();
 	                xhr.open("POST", "/execute", true);
-	                xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8")
+	                xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 	                xhr.onload = function(){
 	                    if (xhr.status==200){
 	                        console.log(xhr.responseText);
@@ -43,12 +43,12 @@
 	                xhr.send(JSON.stringify({status: status, buttonId: buttonId}));
 	            }
 		    document.getElementById("MyBtn").addEventListener("click", function(event) {
-			event.preventDefeault();
+			event.preventDefault();
 			toggleButtonStatus("MyBtn");
 		   });
- 		   document.getElementById("MovieModeBtn").addEventListener("click", function(event) {
-			event.preventDefeault();
-			toggleButtonStatus("MovieModeBtn");
+ 		   document.getElementById("MviBtn").addEventListener("click", function(event) {
+			event.preventDefault();
+			toggleButtonStatus("MviBtn");
 		   });
 		
         </script>
